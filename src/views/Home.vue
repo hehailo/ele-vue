@@ -68,7 +68,7 @@ export default {
 }
 .address_map span {
   display: inline-block;
-  width: 80%;
+  width: 88%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

@@ -6,7 +6,7 @@
     <!-- 中部 搜索框-->
     <div class="city_search">
       <div class="search">
-        <span class="city">
+        <span class="city" @click="$router.push('/city')">
           {{ city }}
           <i class="fa fa-angle-down"></i>
         </span>
@@ -17,13 +17,13 @@
           placeholder="小区/写字楼/学校等"
         />
       </div>
-      <Location @click="selectAddress" :address="address" />
+      <Location @click="setAddress" :address="address" />
     </div>
 
     <!-- 地址结果列表 -->
     <div class="area">
       <ul class="area_list" v-for="(item,index) in areaList" :key="index">
-        <li>
+        <li @click="setAddress(item)">
           <h4>{{item.name}}</h4>
           <p>{{item.district}}{{item.address}}</p>
         </li>
@@ -50,7 +50,7 @@ export default {
   },
   computed: {
     address() {
-      return this.$store.state.address.address || "";
+      return this.$store.state.address.address || "武汉";
     },
   },
   components: { Header, Location },
@@ -61,8 +61,13 @@ export default {
     });
   },
   methods: {
-    selectAddress() {
-      this.$store.dispatch("setAddress", this.address);
+    setAddress(item) {
+      if(item){
+        // 如果是地址列表选中的地址 修改vuex里面存储的数据
+        console.log(item.district+item.name+item.address);
+        this.$store.dispatch("setAddress",item.district+item.name+item.address);
+      }
+      this.$router.push("/home");
     },
     searchPlace(value) {
       console.log(value);
@@ -78,7 +83,7 @@ export default {
         // 根据关键字进行搜索
         autoComplete.search(keyword, function (status, result) {
           // 搜索成功时，result即是对应的匹配数据
-          console.log(result);
+          console.log("地址搜索结果",result);
           _this.areaList = result.tips;
           _this.total = result.count;
         });
