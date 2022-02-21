@@ -34,6 +34,8 @@ export default {
         function onComplete(data) {
           // data是具体的定位信息
           console.log(data);
+          _this.$store.dispatch("setLocation", data);
+          _this.$store.dispatch("setAddress", data.formattedAddress);
         }
         function onError(data) {
           // 精确定位出错 抵用ip定位

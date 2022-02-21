@@ -21,6 +21,16 @@
     </div>
 
     <!-- 地址结果列表 -->
+    <div class="area">
+      <ul class="area_list" v-for="(item,index) in areaList" :key="index">
+        <li>
+          <h4>{{item.name}}</h4>
+          <p>{{item.district}}{{item.address}}</p>
+        </li>
+      </ul>
+    </div>
+
+
   </div>
 </template>
 
@@ -34,6 +44,8 @@ export default {
     return {
       city: "",
       search_val: "",
+      areaList:[],
+      total:0
     };
   },
   computed: {
@@ -56,19 +68,19 @@ export default {
       console.log(value);
       let _this = this;
       let keyword = value;
-
-      AMap.plugin("AMap.AutoComplete", function () {
-        console.log("哈夏速度和舒克舒克");
+      AMap.plugin("AMap.Autocomplete", function () {
         var autoOptions = {
           //city 限定城市，默认全国
-          city: "全国",
+          city: _this.city,
         };
         // 实例化AutoComplete
-        var autoComplete = new AMap.AutoComplete(autoOptions);
+        var autoComplete = new AMap.Autocomplete(autoOptions);
         // 根据关键字进行搜索
         autoComplete.search(keyword, function (status, result) {
           // 搜索成功时，result即是对应的匹配数据
           console.log(result);
+          _this.areaList = result.tips;
+          _this.total = result.count;
         });
       });
     },
