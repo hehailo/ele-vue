@@ -1,19 +1,16 @@
 <template>
   <div id="ssj">
     <div class="header">
-      <div
-        class="address_map"
-        @click="toAddress"
-      >
+      <div class="address_map" @click="toAddress">
         <i class="fa fa-map-marker"></i>
         <span>{{ address }}</span>
         <i class="fa fa-sort-desc"></i>
       </div>
-      <div class="search_wrap" @click="$router.push('/search')">
-        <div class="shop_search">
-          <i class="fa fa-search"></i>
-          搜索商家 商家名称
-        </div>
+    </div>
+    <div class="search_wrap" @click="$router.push('/search')">
+      <div class="shop_search">
+        <i class="fa fa-search"></i>
+        搜索商家 商家名称
       </div>
     </div>
   </div>
@@ -25,7 +22,12 @@ export default {
   name: "Home",
   data() {
     return {
+      entries:[],
+      swipeImgs:[]
     };
+  },
+  created(){
+   this.getData();
   },
   computed: {
     ...mapGetters(["address"]),
@@ -36,13 +38,19 @@ export default {
       );
     },
   },
-  methods:{
-      toAddress(){
-          let city = this.city;
-         this.$router.push({ name: 'address', params: { city } })
-      }
-      
-  }
+  methods: {
+    toAddress() {
+      let city = this.city;
+      this.$router.push({ name: "address", params: { city } });
+    },
+    // 获取基本信息
+    async getData(){
+      // 获取轮播图信息
+      let result = await this.$axios.get("/mock/shopping");
+      this.entries = result.data.data.entries
+      this.swipeImgs = result.data.data.swipeImgs
+    }
+  },
 };
 </script>
 
@@ -53,7 +61,8 @@ export default {
   overflow: auto;
   box-sizing: border-box;
 }
-.header,.search_wrap {
+.header,
+.search_wrap {
   background-color: #009eef;
   padding: 10px 16px;
 }

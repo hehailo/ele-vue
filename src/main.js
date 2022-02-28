@@ -17,11 +17,3 @@ new Vue({
   render: (h) => h(App),
 }).$mount("#app");
 
-
-// let getData = async () => {
-//   //函数体
-//   let result = await axios.get("/mock/cities");
-//   console.log("result", result.data);
-// };
-
-// getData()
