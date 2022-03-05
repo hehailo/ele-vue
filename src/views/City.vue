@@ -64,9 +64,9 @@ export default {
   methods: {
     async getCityInfo() {
       let result = await this.$axios.get("/mock/cities");
-      if (result.data.code == 200) {
-        console.log(result.data.data);
-        let data = result.data.data;
+      console.log("city",result);
+      if (result.code == 200) {
+        let data = result.data;
         this.cityInfo = data;
         //获取所有的ekeys
         let keys = Object.keys(data);
@@ -77,8 +77,7 @@ export default {
 
         //通知子组件初始化scroll
         this.$nextTick(() => {
-          //函数体
-          console.log(this);
+          //函数体          
           this.$refs.allcity.initScroll();
         });
 

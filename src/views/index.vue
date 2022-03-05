@@ -1,7 +1,11 @@
 <template>
-  <div id="index">
-    <router-view></router-view>
-    <TabBar :data="tabData"></TabBar>
+  <div>
+    <div id="index">
+      <router-view></router-view>
+    </div>
+    <div style="height:45px">
+      <TabBar :data="tabData"></TabBar>
+    </div>
   </div>
 </template>
 
@@ -25,13 +29,9 @@ export default {
 </script>
 
 <style scoped>
-.test{
-  background-color:pink;
-  height: 1000px;
-}
 #index {
   width: 100%;
-  height: calc(100% - 45px);
+  /* height: calc(100% - 45px); */
 }
 </style>
 

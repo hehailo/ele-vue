@@ -8,7 +8,7 @@
           <li
             @click="$emit('selectCity', item.name)"
             v-for="(item, index) in cityInfo.hotCities"
-            :key="item.id"
+            :key="index"
           >
             {{ item.name }}
           </li>
@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import BetterScroll from 'better-scroll'
+import BetterScroll from "better-scroll";
 export default {
   name: "Alphabet",
   data() {
@@ -71,7 +71,6 @@ export default {
       this.scroll = new BetterScroll(this.$refs.area_scroll, {
         click: true,
       });
-      console.log("23343455");
     },
     // 跳转到指定的城市区域
     selectKey(index) {
@@ -87,7 +86,6 @@ export default {
       console.log("el", el);
       el.scrollIntoView();
       // this.scroll.scrollToElement(el,250);
-
     },
   },
 };

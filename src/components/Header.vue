@@ -4,7 +4,7 @@
     <!-- 左侧返回按钮 -->
     <div class="header-button is-left" v-show="isLeft">
       <i class="fa fa-chevron-left"></i>
-      <button @click="$router.go(-1)">返回</button>
+      <button @click="$router.push('/home')">返回</button>
     </div>
 
     <!-- 标题 -->

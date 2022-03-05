@@ -3,7 +3,7 @@
     <div class="title">当前定位</div>
     <div class="des" @click="$emit('click')">
       <i class="fa fa-location-arrow"></i>
-      <span>{{address}}</span>
+      <span>{{ address }}</span>
     </div>
   </div>
 </template>
@@ -12,8 +12,8 @@
 export default {
   name: "Location",
   props: {
-    address: String
-  }
+    address: String,
+  },
 };
 </script>
 
